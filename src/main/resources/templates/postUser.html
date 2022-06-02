@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Post user form</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>Result</h1>
+        <p th:text="'First Name: ' + ${user.firstName}" />
+        <p th:text="'Second Name: ' + ${user.secondName}" />
+        <p th:text="'Last Name: ' + ${user.lastName}" />
+        <p th:text="'Salary: ' + ${user.salary}" />
+        <p th:text="'Email: ' + ${user.email}" />
+        <p th:text="'Job Place: ' + ${user.jobPlace}" />
+        <a href="/input-user">Input another person</a>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add user form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" th:src="@{/validation.js}"></script>
+</head>
+    <body>
+        <h1>Add User</h1>
+        <form action="#" th:action="@{/input-user}" th:object="${userAttribute}" method="post">
+            <p>First Name: <input type="text" id="first_name" th:field="*{firstName}" /></p>
+            <p>Second Name: <input type="text" id="last_name" th:field="*{secondName}" /></p>
+            <p>Last Name: <input type="text" id="second_name" th:field="*{lastName}" /></p>
+            <p>Salary: <input type="text" id="salary" th:field="*{salary}" /></p>
+            <span id = error_salary></span>
+            <p>Email: <input type="text" id="email" onchange="myValidation();" th:field="*{email}" /></p>
+            <span id = error_email></span>
+            <p>Job Place: <input type="text" id="job_place" th:field="*{jobPlace}" /></p>
+            <p><input type="submit" value="Submit" id = "submitButton" disabled />
+                <input type="reset" value="Reset" />
+                <a href="/search-user">Search user</a>
+                <a href="/input-file">Input file</a>
+                <a href="/send-message">Send a message</a></p>
+        </form>
+    </body>
+</html>

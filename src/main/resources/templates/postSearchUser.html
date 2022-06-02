@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Post search form</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>Result of searching</h1>
+            <p th:text="'First Name: ' + ${user.firstName}" />
+            <p th:text="'Second Name: ' + ${user.secondName}" />
+            <p th:text="'Last Name: ' + ${user.lastName}" />
+            <p th:text="'Salary: ' + ${user.salary}" />
+            <p th:text="'Email: ' + ${user.email}" />
+            <p th:text="'Job Place: ' + ${user.jobPlace}" />
+
+            <p th:text="'User agent: ' + ${agent.userAgent}" />
+            <p th:text="'Time: ' + ${agent.time}" />
+
+            <a href="/search-user">Search new person</a>
+            <a href="/input-user">Input new person</a>
+    </body>
+</html>
