@@ -1,16 +1,22 @@
 package com.netcracker.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.nio.charset.StandardCharsets;
+import java.io.FileNotFoundException;
 
-@Service
+@Component
 public class EmailService {
 
     @Autowired
@@ -18,24 +24,19 @@ public class EmailService {
 
     public void sendSimpleEmail(String toAddress, String subject, String message) {
 
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setTo(toAddress);
-        simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(message);
+        MimeMessagePreparator simpleMailMessage = newMessage -> {
+            newMessage.setRecipient(
+                    Message.RecipientType.TO,
+                    new InternetAddress(toAddress)
+            );
+            newMessage.setFrom("alexvarte@yandex.ru");
+            newMessage.setSubject(subject);
+            newMessage.setText(message);
+        };
+//        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+//        simpleMailMessage.setTo(toAddress);
+//        simpleMailMessage.setSubject(subject);
+//        simpleMailMessage.setText(message);
         emailSender.send(simpleMailMessage);
-//        MimeMessage mimeMessage = emailSender.createMimeMessage();
-//        MimeMessageHelper mimeMessageHelper;
-//        try {
-//            mimeMessageHelper = new MimeMessageHelper(mimeMessage,
-//                    MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
-//                    StandardCharsets.UTF_8.name());
-//            mimeMessageHelper.setTo(toAddress);
-//            mimeMessageHelper.setSubject(subject);
-//            mimeMessageHelper.setFrom("alexvarte@yandex.ru");
-//            mimeMessageHelper.setText(message, false);
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
-//        emailSender.send(mimeMessage);
     }
 }
