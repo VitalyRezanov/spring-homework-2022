@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add user form</title>
+    <title>Send mail form</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script type="text/javascript" th:src="@{/validation.js}"></script>
 </head>
 <body>
-<h1>Add User</h1>
+<h1>Send mail</h1>
 <form action="#" th:action="@{/send-message}" th:object="${emailAttribute}" method="post">
     <p>Email: <input type="text" id="email" onchange="myValidation();" th:field="*{email}" /></p>
     <span id = error_email></span>

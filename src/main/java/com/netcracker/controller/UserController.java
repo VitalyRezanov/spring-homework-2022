@@ -1,6 +1,8 @@
 package com.netcracker.controller;
 
 import com.netcracker.model.User;
+import com.netcracker.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
@@ -8,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.io.*;
 
 @Controller
 public class UserController {
@@ -21,18 +21,11 @@ public class UserController {
         return "addUser";
     }
 
+    @Autowired
+    UserService userService;
+
     @PostMapping("/input-user")
     public String userSubmit(@ModelAttribute User user) {
-
-        try(BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resource.getFile(), true))))
-        {
-            bw.write(user.getFirstName() + "," + user.getSecondName() + "," +
-                    user.getLastName() + "," + user.getSalary() + "," + user.getEmail() + "," +
-                    user.getJobPlace() + "/");
-        }
-        catch(IOException ex){
-            System.out.println(ex.getMessage());
-        }
-        return "postUser";
+        return userService.addUser(user, resource);
     }
 }
